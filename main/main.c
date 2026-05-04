@@ -17,10 +17,10 @@
 
 // ========== 用户配置区 ==========
 // WS2812 数据线连接的 GPIO 引脚号（根据你的接线修改）
-#define LED_STRIP_GPIO_PIN      8
+#define LED_STRIP_GPIO_PIN      2
 
 // 灯带上的 LED 数量（根据你的灯带修改）
-#define LED_STRIP_LED_COUNT     30
+#define LED_STRIP_LED_COUNT     100
 
 // RMT 时钟分辨率 (Hz)，10MHz = 1 tick = 0.1us
 #define LED_STRIP_RMT_RES_HZ    (10 * 1000 * 1000)
