@@ -1,0 +1,34 @@
+{
+  "configurations": [
+    {
+      "name": "ESP-IDF",
+      "compilerPath": "${config:idf.toolsPathWin}\\tools\\xtensa-esp32-elf\\esp-12.2.0_20230208\\xtensa-esp32-elf\\bin\\xtensa-esp32-elf-gcc.exe",
+      "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+      "includePath": [
+        "${config:idf.espIdfPath}/components/**",
+        "${config:idf.espIdfPathWin}/components/**",
+        "${workspaceFolder}/main",
+        "${workspaceFolder}/build/config",
+        "${workspaceFolder}/components/**",
+        "${workspaceFolder}/**",
+        "${config:idf.toolsPathWin}/tools/xtensa-esp32-elf/esp-12.2.0_20230208/xtensa-esp32-elf/xtensa-esp32-elf/include",
+        "${config:idf.toolsPathWin}/tools/xtensa-esp32-elf/esp-12.2.0_20230208/xtensa-esp32-elf/lib/gcc/**/include",
+        "${config:idf.toolsPathWin}/tools/xtensa-esp32-elf/esp-12.2.0_20230208/xtensa-esp32-elf/include-fixed"
+      ],
+      "intelliSenseMode": "gcc-x64",
+      "browse": {
+        "path": [
+          "${config:idf.espIdfPath}/components",
+          "${config:idf.espIdfPathWin}/components",
+          "${workspaceFolder}/main",
+          "${workspaceFolder}/build/config",
+          "${workspaceFolder}",
+          "${config:idf.toolsPathWin}/tools/xtensa-esp32-elf/esp-12.2.0_20230208/xtensa-esp32-elf/xtensa-esp32-elf/include",
+          "${config:idf.toolsPathWin}/tools/xtensa-esp32-elf/esp-12.2.0_20230208/xtensa-esp32-elf/lib/gcc"
+        ],
+        "limitSymbolsToIncludedHeaders": true
+      }
+    }
+  ],
+  "version": 4
+}

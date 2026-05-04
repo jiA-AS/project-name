@@ -1,0 +1,13 @@
+{
+  "C_Cpp.intelliSenseEngine": "default",
+  "idf.espIdfPathWin": "D:/DevEnv/Espressif/frameworks/esp-idf-v5.1.2/",
+  "idf.pythonInstallPath": "D:\\DevEnv\\Espressif\\tools\\idf-python\\3.11.2\\python.exe",
+  "idf.openOcdConfigs": [
+    "board/esp32-wrover-kit-3.3v.cfg"
+  ],
+  "idf.portWin": "COM3",
+  "idf.toolsPathWin": "D:\\DevEnv\\Espressif",
+  "idf.customExtraVars": {
+    "IDF_TARGET": "esp32"
+  }
+}
