@@ -108,17 +108,31 @@ static void set_inner_9x9(uint8_t red, uint8_t green, uint8_t blue)
     ESP_ERROR_CHECK(led_strip_refresh(led_strip));
 }
 
+/**
+ * @brief 点亮 10x10 矩阵中全部 100 颗 LED 为指定颜色
+ * @param red     红色分量 (0-255)
+ * @param green   绿色分量 (0-255)
+ * @param blue    蓝色分量 (0-255)
+ */
+static void set_all_leds(uint8_t red, uint8_t green, uint8_t blue)
+{
+    for (int i = 0; i < LED_STRIP_LED_COUNT; i++) {
+        ESP_ERROR_CHECK(led_strip_set_pixel(led_strip, i, red, green, blue));
+    }
+    ESP_ERROR_CHECK(led_strip_refresh(led_strip));
+}
+
 void app_main(void)
 {
-    ESP_LOGI(TAG, "WS2812 10x10 矩阵 - 仅中间 9x9 区域亮绿色（低亮度）");
+    ESP_LOGI(TAG, "WS2812 10x10 矩阵 - 全部 100 颗 LED 亮绿色（最高亮度）");
 
     // 初始化 LED strip
     configure_led();
 
-    // 仅中间 9x9 区域亮绿色，亮度调低
-    set_inner_9x9(0, 10, 0);
+    // 全部 100 颗 LED 亮绿色，最高亮度
+    set_all_leds(0, 255, 0);
 
-    ESP_LOGI(TAG, "已设置中间 9x9 区域亮绿色（亮度: 10/255），边框熄灭");
+    ESP_LOGI(TAG, "已设置全部 100 颗 LED 亮绿色（亮度: 255/255）");
 
     // 程序保持运行，不做其他事情
     while (1) {
