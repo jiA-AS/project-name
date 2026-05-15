@@ -83,56 +83,41 @@ static void index_to_matrix(int index, int *row, int *col)
 }
 
 /**
- * @brief 设置 10x10 矩阵中仅中间 9x9 区域的 LED 为指定颜色
- *        即去掉最外圈的一圈边框，只点亮内部 9x9=81 颗灯
+ * @brief 设置 10x10 矩阵中仅 9x9 区域（81 颗灯）亮绿色（亮度 255）
+ *        去掉最后一行（row 9）和最后一列（col 9），保留 row 0~8, col 0~8
  * @param red     红色分量 (0-255)
  * @param green   绿色分量 (0-255)
  * @param blue    蓝色分量 (0-255)
  */
-static void set_inner_9x9(uint8_t red, uint8_t green, uint8_t blue)
+static void set_9x9_area(uint8_t red, uint8_t green, uint8_t blue)
 {
     // 先全部熄灭
     for (int i = 0; i < LED_STRIP_LED_COUNT; i++) {
         ESP_ERROR_CHECK(led_strip_set_pixel(led_strip, i, 0, 0, 0));
     }
 
-    // 点亮中间 9x9 区域
+    // 点亮 9x9 区域（row 0~8, col 0~8）
     for (int i = 0; i < LED_STRIP_LED_COUNT; i++) {
         int row, col;
         index_to_matrix(i, &row, &col);
-        // 去掉最外圈：row 0~9 中只保留 1~8，col 0~9 中只保留 1~8
-        if (row >= 1 && row <= 8 && col >= 1 && col <= 8) {
+        if (row <= 8 && col <= 8) {
             ESP_ERROR_CHECK(led_strip_set_pixel(led_strip, i, red, green, blue));
         }
     }
     ESP_ERROR_CHECK(led_strip_refresh(led_strip));
 }
 
-/**
- * @brief 点亮 10x10 矩阵中全部 100 颗 LED 为指定颜色
- * @param red     红色分量 (0-255)
- * @param green   绿色分量 (0-255)
- * @param blue    蓝色分量 (0-255)
- */
-static void set_all_leds(uint8_t red, uint8_t green, uint8_t blue)
-{
-    for (int i = 0; i < LED_STRIP_LED_COUNT; i++) {
-        ESP_ERROR_CHECK(led_strip_set_pixel(led_strip, i, red, green, blue));
-    }
-    ESP_ERROR_CHECK(led_strip_refresh(led_strip));
-}
-
 void app_main(void)
 {
-    ESP_LOGI(TAG, "WS2812 10x10 矩阵 - 全部 100 颗 LED 亮绿色（最高亮度）");
+    ESP_LOGI(TAG, "WS2812 10x10 矩阵 - 仅 9x9 区域亮绿色（最高亮度）");
 
     // 初始化 LED strip
     configure_led();
 
-    // 全部 100 颗 LED 亮绿色，最高亮度
-    set_all_leds(0, 255, 0);
+    // 仅 9x9 区域亮绿色，亮度 255
+    set_9x9_area(0, 255, 0);
 
-    ESP_LOGI(TAG, "已设置全部 100 颗 LED 亮绿色（亮度: 255/255）");
+    ESP_LOGI(TAG, "已设置 9x9 区域亮绿色（亮度: 255/255），其余熄灭");
 
     // 程序保持运行，不做其他事情
     while (1) {
